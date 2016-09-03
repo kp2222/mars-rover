@@ -56,5 +56,17 @@ class Rover
       end
     end
   end
+
+  def execute(instruction)
+    if instruction == "M"
+      self.move
+    else
+      self.turn(instruction)
+    end
+  end
+
+  def describe_status
+    "x: #{@x} y: #{@y} #{@heading}"
+  end
   
 end
