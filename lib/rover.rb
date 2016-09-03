@@ -1,63 +1,25 @@
 require_relative "../lib/plateau"
+require_relative "../lib/direction"
+
 class Rover
-  attr_accessor :x, :y, :heading, :plateau_boundary
+  attr_accessor :x, :y, :heading, :plateau_boundary, :direction
 
   def initialize(x,y,heading, plateau_boundary)
-    @x, @y, @heading, @plateau_boundary= x, y, heading
+    @x, @y,  @plateau_boundary= x, y
+    @direction = Direction.from_s heading
     @plateau = Plateau.new(*plateau_boundary)
   end
 
   def move
-    new_location = calculate_new_location x, y
+    new_location = @direction.move x, y
     @x, @y = new_location  if @plateau.within_bounds?(*new_location)
   end
 
-  def calculate_new_location(x, y)
-    case @heading
-    when "N"
-      y += 1 
-    when "S"
-      y -= 1 
-    when "E"
-      x += 1 
-    when "W"
-      x -= 1 
-    end
-    return x, y
+
+  def turn(turn_direction)
+    @direction = @direction.turn(turn_direction)
   end
 
-  def within_plateau_boundary?(x,y)
-   (0..@plateau_boundary.first).include?(x) && (0..@plateau_boundary.last).include?(y) 
-  end
-
-  def turn(direction)
-    case @heading
-    when "N"
-      if direction == "L"
-        @heading = "W"
-      else
-        @heading = "E"
-      end
-    when "S"
-      if direction == "L"
-        @heading = "E"
-      else
-        @heading = "W"
-      end
-    when "W"
-      if direction == "L"
-        @heading = "S"
-      else
-        @heading = "N"
-      end
-    when "E"
-      if direction == "L"
-        @heading = "N"
-      else
-        @heading = "S"
-      end
-    end
-  end
 
   def execute(instruction)
     if instruction == "M"
@@ -70,5 +32,12 @@ class Rover
   def describe_status
     "x: #{@x} y: #{@y} #{@heading}"
   end
-  
+
+  def heading=(new_heading)
+    @direction = Direction.from_s(new_heading)
+  end
+
+  def heading
+    @direction.code
+  end
 end

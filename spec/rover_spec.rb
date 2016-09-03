@@ -69,47 +69,47 @@ describe Rover do
         @rover.heading = "N"
         @rover.turn "L"
 
-        expect(@rover.heading).to eql "W"
+        expect(@rover.direction.code).to eql "W"
 
         @rover.heading = "N"
         @rover.turn "R"
 
-        expect(@rover.heading).to eql "E"
+        expect(@rover.direction.code).to eql "E"
       end
       it "when current heading is 'south'" do
         @rover.heading = "S"
         @rover.turn "L"
 
-        expect(@rover.heading).to eql "E"
+        expect(@rover.direction.code).to eql "E"
 
         @rover.heading = "S"
         @rover.turn "R"
 
-        expect(@rover.heading).to eql "W"
+        expect(@rover.direction.code).to eql "W"
       end
 
       it "when current heading is 'east'" do
         @rover.heading = "E"
         @rover.turn "L"
 
-        expect(@rover.heading).to eql "N"
+        expect(@rover.direction.code).to eql "N"
 
         @rover.heading = "E"
         @rover.turn "R"
 
-        expect(@rover.heading).to eql "S"
+        expect(@rover.direction.code).to eql "S"
       end
 
       it "when current heading is 'west'" do
         @rover.heading = "W"
         @rover.turn "L"
 
-        expect(@rover.heading).to eql "S"
+        expect(@rover.direction.code).to eql "S"
 
         @rover.heading = "W"
         @rover.turn "R"
 
-        expect(@rover.heading).to eql "N"
+        expect(@rover.direction.code).to eql "N"
       end
     end
     
