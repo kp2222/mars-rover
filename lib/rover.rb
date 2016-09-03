@@ -1,13 +1,15 @@
+require_relative "../lib/plateau"
 class Rover
   attr_accessor :x, :y, :heading, :plateau_boundary
 
   def initialize(x,y,heading, plateau_boundary)
-    @x, @y, @heading, @plateau_boundary= x, y, heading, plateau_boundary
+    @x, @y, @heading, @plateau_boundary= x, y, heading
+    @plateau = Plateau.new(*plateau_boundary)
   end
 
   def move
     new_location = calculate_new_location x, y
-    @x, @y = new_location  if within_plateau_boundary?(*new_location)
+    @x, @y = new_location  if @plateau.within_bounds?(*new_location)
   end
 
   def calculate_new_location(x, y)
