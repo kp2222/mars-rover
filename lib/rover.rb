@@ -30,7 +30,7 @@ class Rover
   end
 
   def describe_status
-    "x: #{@x} y: #{@y} #{@heading}"
+    "x: #{@x} y: #{@y} heading: #{heading}"
   end
 
   def heading=(new_heading)
