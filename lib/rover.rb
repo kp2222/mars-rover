@@ -2,10 +2,10 @@ require_relative "../lib/plateau"
 require_relative "../lib/direction"
 
 class Rover
-  attr_accessor :x, :y, :heading, :plateau_boundary, :direction
+  attr_accessor :x, :y, :heading, :direction
 
   def initialize(x,y,heading, plateau_boundary)
-    @x, @y,  @plateau_boundary= x, y
+    @x, @y = x, y
     @direction = Direction.from_s heading
     @plateau = Plateau.new(*plateau_boundary)
   end
